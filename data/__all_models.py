@@ -1,1 +1,2 @@
-import users
+from . import users
+from .users import *
