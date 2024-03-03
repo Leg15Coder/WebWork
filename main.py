@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect
 from forms.user import *
 from data import db_session
 from data.__all_models import *
-from flask_login import LoginManager, login_user
+from flask_login import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "some_secret_key"
@@ -21,7 +21,7 @@ def root():
     param = {
         'title': "Navigator in IT",
     }
-    return render_template('base.html', **param)
+    return render_template('Navigator/main.html', **param)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -66,6 +66,29 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('users/login.html', title='Авторизация', form=form)
+
+
+@app.route('/news',  methods=['GET', 'POST'])
+def add_news():
+    form = NewsForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        news = News()
+        news.title = form.title.data
+        news.content = form.content.data
+        news.is_private = form.is_private.data
+        current_user.news.append(news)
+        db_sess.merge(current_user)
+        db_sess.commit()
+        return redirect('/')
+    return render_template('news.html', title='Добавление новости', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
 
 
 def main():

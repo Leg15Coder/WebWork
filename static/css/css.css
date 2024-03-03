@@ -1,0 +1,17 @@
+.btn-circle  {
+    border-radius: 25px;
+}
+
+.test {
+    width: 500px;
+    height: 500px;
+    backgroud-color: yellow !important;
+}
+
+.card {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    height: 16hw;
+    width: 9hw;
+}
