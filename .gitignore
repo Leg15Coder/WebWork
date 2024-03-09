@@ -161,3 +161,4 @@ cython_debug/
 .~lock*
 db/
 config.cfg
+*.cfg
