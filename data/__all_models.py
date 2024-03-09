@@ -1,2 +1,2 @@
 from . import users
-from .users import *
+from .users import User
