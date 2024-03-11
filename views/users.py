@@ -10,35 +10,41 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-
-db_session.global_init('db/db.db')
 blueprint = Blueprint('users', __name__)
 
 
-@blueprint.route('/register', methods=['GET', 'POST'])
+@blueprint.route('/login', methods=['GET', 'POST'])
 @logout_required
-def reqister():
-    form = RegisterForm()
+def login():
+    reg_form = RegisterForm()
+    log_form = LoginForm()
     params = {
         'title': 'Регистрация',
-        'form': form
+        'reg_form': reg_form,
+        'log_form': log_form
     }
-    if form.validate_on_submit():
-        if form.password.data != form.password_again.data:
-            return render_template('users/register.html', title='Регистрация',
-                                   form=form,
-                                   message="Пароли не совпадают")
+    if log_form.validate_on_submit():
         db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form.email.data).first():
-            return render_template('users/register.html', title='Регистрация',
-                                   form=form,
-                                   message="Такой пользователь уже есть")
+        user = db_sess.query(User).filter(User.email == log_form.email.data).first()
+        if user and user.check_password(log_form.password.data):
+            login_user(user, remember=log_form.remember_me.data)
+            return redirect("/")
+        params['message'] = "Неправильный логин или пароль"
+        return render_template('users/login.html', **params)
+    if reg_form.validate_on_submit():
+        if reg_form.password.data != reg_form.password_again.data:
+            params['message'] = "Пароли не совпадают"
+            return render_template('users/login.html', **params)
+        db_sess = db_session.create_session()
+        if db_sess.query(User).filter(User.email == reg_form.email.data).first():
+            params['message'] = "Такой пользователь уже есть"
+            return render_template('users/login.html', **params)
         user = User(
-            name=form.name.data,
-            email=form.email.data,
-            about=form.about.data
+            name=reg_form.name.data,
+            email=reg_form.email.data,
+            about=reg_form.about.data
         )
-        user.set_password(form.password.data)
+        user.set_password(reg_form.password.data)
         db_sess.add(user)
         db_sess.commit()
         with app.app_context():
@@ -48,7 +54,6 @@ def reqister():
             msg = MIMEMultipart()
             msg['Subject'] = Header('Subject of the email', 'utf-8')
             msg.attach(MIMEText(template.encode('utf-8'), 'html', 'utf-8'))
-
             server = SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(app.config['MAIL_DEFAULT_SENDER'], app.config['MAIL_PASSWORD'])
@@ -56,7 +61,7 @@ def reqister():
             server.close()
         login_user(user)
         return redirect('/')
-    return render_template('users/register.html', **params)
+    return render_template('users/login.html', **params)
 
 
 @blueprint.route("/confirm/<token>")
@@ -87,24 +92,13 @@ def confirm_email(token):
         return render_template('users/account_confirm.html', **params)
 
 
-@blueprint.route('/login', methods=['GET', 'POST'])
-@logout_required
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.email == form.email.data).first()
-        if user and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
-            return redirect("/")
-        return render_template('users/login.html',
-                               message="Неправильный логин или пароль",
-                               form=form)
-    return render_template('users/login.html', title='Авторизация', form=form)
-
-
 @blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect("/")
+
+
+@blueprint.route('/profile/<int:id>')
+def profile(id: int):
+    pass

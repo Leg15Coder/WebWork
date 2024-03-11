@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+    integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -16,30 +17,23 @@
         <header>
             <nav class="navbar navbar-dark bg-dark fixed-top">
                 <a class="navbar-brand" href="/">ICON</a>
-                <a class="nav-link nav-item text-light" href="/">Главная</a>
-                <a class="nav-link nav-item text-light" href="/">Новости</a>
-                <a class="nav-link nav-item text-light" href="/">Обучение</a>
-                <a class="nav-link nav-item text-light" href="/">О нас</a>
-                <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="nav-link nav-item text-light" href="/profession/all">Главная</a>
+                <a class="nav-link nav-item text-light" href="/game">Игра</a>
+                <a class="nav-link nav-item text-light" href="/about">О нас</a>
+                {% if current_user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-outline-light nav-menu" type="button" data-toggle="dropdown" id="navdropdown" aria-haspopup="true"  aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse bg-dark text-light" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                        {% if current_user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="btn btn-outline-light btn-circle" href="/logout">Выйти</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="btn btn-primary btn-circle" href="/register">Зарегистрироваться</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-success btn-circle" href="/login">Войти</a>
-                            </li>
-                        {% endif %}
-                    </ul>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark text-light" aria-labelledby="navdropdown">
+                        <a class="dropdown-item bg-dark text-light" href="/profile/{{current_user.id}}">{{current_user.name}}</a>
+                        <a class="dropdown-item bg-dark text-light" href="/logout">Выйти</a>
+                    </div>
                 </div>
+                {% else %}
+                <a href="/login"><button>START</button></a>
+                {% endif %}
             </nav>
         </header>
         <!-- Begin page content -->
