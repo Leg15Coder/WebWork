@@ -1,7 +1,7 @@
 from WEB_YL.data.utils import logout_required, confirm_token, generate_token
 from flask import redirect, url_for, render_template, Blueprint
 from WEB_YL.data import db_session
-from WEB_YL.forms.user import LoginForm, RegisterForm
+from WEB_YL.forms.user import LoginForm, RegisterForm, AskRecoveryForm, AcceptRecoveryForm, RecoveryForm
 from WEB_YL.data.__all_models import User
 from flask_login import login_required, login_user, logout_user, current_user
 from flask import current_app as app
@@ -30,7 +30,7 @@ def login():
             login_user(user, remember=log_form.remember_me.data)
             return redirect("/")
         params['message'] = "Неправильный логин или пароль"
-        return render_template('users/login.html', **params)
+        # return render_template('users/login.html', **params)
     if reg_form.validate_on_submit():
         if reg_form.password.data != reg_form.password_again.data:
             params['message'] = "Пароли не совпадают"
@@ -41,8 +41,7 @@ def login():
             return render_template('users/login.html', **params)
         user = User(
             name=reg_form.name.data,
-            email=reg_form.email.data,
-            about=reg_form.about.data
+            email=reg_form.email.data
         )
         user.set_password(reg_form.password.data)
         db_sess.add(user)
@@ -90,6 +89,62 @@ def confirm_email(token):
     else:
         params['message'] = "Пользователь не найден"
         return render_template('users/account_confirm.html', **params)
+
+
+@blueprint.route("/recovery_account", methods=['GET', 'POST'])
+def recovery_account():
+    form = AskRecoveryForm()
+    params = {
+        'form': form
+    }
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user:
+            with app.app_context():
+                token = generate_token(user.email)
+                confirm_url = url_for("users.recovery_email", token=token, _external=True)
+                template = render_template("users/recovery_email.html", confirm_url=confirm_url)
+                msg = MIMEMultipart()
+                msg['Subject'] = Header('Subject of the email', 'utf-8')
+                msg.attach(MIMEText(template.encode('utf-8'), 'html', 'utf-8'))
+                server = SMTP_SSL('smtp.gmail.com', 465)
+                server.ehlo()
+                server.login(app.config['MAIL_DEFAULT_SENDER'], app.config['MAIL_PASSWORD'])
+                server.sendmail(app.config['MAIL_USERNAME'], user.email, msg.as_string())
+                server.close()
+                params['message'] = "Вам на почту отправлено письмо с инструкцией по восстановлению аккаунта"
+        else:
+            params['message'] = "Пользователя с такой почтой не существует"
+    return render_template('users/recovery_account.html', **params)
+
+
+@blueprint.route("/recovery/<token>")
+@login_required
+def confirm_email(token):
+    params = {
+        'form': RecoveryForm(),
+        'message': str()
+    }
+    db_sess = db_session.create_session()
+    email = confirm_token(token)
+    user = db_sess.query(User).filter(User.email == current_user.email).first()
+    if params['form'].validate_on_submit() and params['form'].password == params['form'].password_again:
+        if user:
+            if user.email == email:
+                user.set_password(params['form'].password)
+                db_sess.commit()
+                params['message'] = "Аккаунт успешно подтверждён"
+                login_user(user)
+                return redirect("/")
+            else:
+                params['message'] = "Ссылка недействительна"
+                return render_template('users/recovery_account.html', **params)
+        else:
+            params['message'] = "Пользователь не найден"
+            return render_template('users/recovery_account.html', **params)
+    params['message'] = "Пароли не совпадают"
+    return render_template('users/recovery_account.html', **params)
 
 
 @blueprint.route('/logout')
