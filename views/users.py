@@ -29,7 +29,10 @@ def login():
         if user and user.check_password(log_form.password.data):
             login_user(user, remember=log_form.remember_me.data)
             return redirect("/")
-        params['message'] = "Неправильный логин или пароль"
+        elif not user.is_confirmed:
+            params['message'] = "Вы не подтвердили аккаунт по почте"
+        else:
+            params['message'] = "Неправильный логин или пароль"
         # return render_template('users/login.html', **params)
     if reg_form.validate_on_submit():
         if reg_form.password.data != reg_form.password_again.data:
@@ -58,13 +61,11 @@ def login():
             server.login(app.config['MAIL_DEFAULT_SENDER'], app.config['MAIL_PASSWORD'])
             server.sendmail(app.config['MAIL_USERNAME'], user.email, msg.as_string())
             server.close()
-        login_user(user)
         return redirect('/')
     return render_template('users/login.html', **params)
 
 
 @blueprint.route("/confirm/<token>")
-@login_required
 def confirm_email(token):
     params = {
         'title': 'Подтверждение аккаунта',
@@ -75,23 +76,21 @@ def confirm_email(token):
         return render_template('users/account_confirm.html', **params)
     db_sess = db_session.create_session()
     email = confirm_token(token)
-    user = db_sess.query(User).filter(User.email == current_user.email).first()
+    user = db_sess.query(User).filter(User.email == email).first()
     if user:
-        if user.email == email:
-            current_user.is_confirmed = True
-            db_sess.merge(current_user)
-            db_sess.commit()
-            params['message'] = "Аккаунт успешно подтверждён"
-            return render_template('users/account_confirm.html', **params)
-        else:
-            params['message'] = "Ссылка недействительна"
-            return render_template('users/account_confirm.html', **params)
+        user.is_confirmed = True
+        db_sess.merge(user)
+        db_sess.commit()
+        params['message'] = "Аккаунт успешно подтверждён"
+        login_user(user)
+        return render_template('users/account_confirm.html', **params)
     else:
         params['message'] = "Пользователь не найден"
         return render_template('users/account_confirm.html', **params)
 
 
 @blueprint.route("/recovery_account", methods=['GET', 'POST'])
+@logout_required
 def recovery_account():
     form = AskRecoveryForm()
     params = {
@@ -120,8 +119,8 @@ def recovery_account():
 
 
 @blueprint.route("/recovery/<token>")
-@login_required
-def confirm_email(token):
+@logout_required
+def recovery_email(token):
     params = {
         'form': RecoveryForm(),
         'message': str()

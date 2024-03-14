@@ -111,7 +111,7 @@ h6 span {
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: #bfbfbf;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before {
@@ -121,7 +121,7 @@ h6 span {
   height: 36px;
   border-radius: 50%;
   color: #ffeba7;
-  background-color: #102770;
+  background-color: #00bfbf;
   font-family: "unicons";
   content: "\eb4f";
   z-index: 20;
@@ -335,3 +335,35 @@ h6 span {
   display: block;
 }
 
+.lending-background {
+    width: 100vw;
+    height: 100vh;
+}
+
+.circle-btn {
+    font-size: 28pt;
+    align: center;
+    left: 50vw;
+    top: 40vh;
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: #00bfbf;
+    color: #102720;
+    box-shadow: 0 8px 24px 0 rgba(10, 235, 235, 0.35);
+}
+
+.circle-btn:active,
+.circle-btn:focus {
+  background-color: #00bfbf;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(0, 112, 112, 0.2);
+}
+
+.circle-btn:hover {
+  background-color: #102322;
+  color: #bfbfbf;
+  box-shadow: 0 8px 24px 0 rgba(0, 112, 112, 0.2);
+  transition: 1s;
+}
