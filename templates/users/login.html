@@ -24,7 +24,10 @@
                                     {{ error }}
                                 </div>
                             {% endfor %}
-                          <i class="input-icon uil uil-at">@</i>
+                            <div class="input-icon uil uil-at">
+                                <img src="static/img/email.png" alt="@" srcset=""
+                                style="width: 32px;">
+                            </div>
                         </div>
                         <div class="form-group mt-2" name="logpass">
                           {{ log_form.password(class="form-style", type="password", placeholder="Ваш пароль", id="logpass", autocomplete="off") }}<br>
@@ -33,12 +36,15 @@
                                     {{ error }}
                                 </div>
                             {% endfor %}
-                          <i class="input-icon uil uil-lock-alt">🔒</i>
+                          <div class="input-icon uil uil-lock-alt">
+                                <img src="static/img/password_2.png" alt="🔒" srcset=""
+                                style="width: 32px;">
+                          </div>
                         </div>
                         <p class="mb-0 mt-4 text-center">{{ log_form.remember_me(class="mb-0 mt-4 text-center") }} {{ log_form.remember_me.label }}</p>
                         <p>{{ log_form.submit(type="submit", class="btn mt-4", form="login") }}</p>
                         <div>{{ message }}</div>
-                        <p class="mb-0 mt-4 text-center"><a href="/" class="link">Forgot your password?</a></p>
+                        <p class="mb-0 mt-4 text-center"><a href="/recovery_account" class="link">Забыли пароль?</a></p>
                           </form>
                       </div>
                     </div>
@@ -56,7 +62,10 @@
                                   {{ error }}
                               </p>
                           {% endfor %}
-                          <i class="input-icon uil uil-user"></i>
+                          <div class="input-icon">
+                                <img src="static/img/profile_2.png" alt="" srcset=""
+                                style="width: 32px;">
+                          </div>
                         </div>
                         <div class="form-group mt-2" name="logemail">
                           {{ reg_form.email(type="email", class="form-style", placeholder="Ваша почта", id="logemail", autocomplete="off") }}<br>
@@ -65,7 +74,10 @@
                                   {{ error }}
                               </p>
                           {% endfor %}
-                          <i class="input-icon uil uil-at"></i>
+                          <div class="input-icon">
+                                <img src="static/img/email_for_registr.png" alt="" srcset=""
+                                style="width: 32px;">
+                          </div>
                         </div>
                         <div class="form-group mt-2" name="logpass">
                           {{ reg_form.password(type="password", class="form-style", placeholder="Введите пароль", id="logpass", autocomplete="off") }}<br>
@@ -74,7 +86,10 @@
                                   {{ error }}
                               </p>
                           {% endfor %}
-                          <i class="input-icon uil uil-lock-alt"></i>
+                          <div class="input-icon">
+                                <img src="static/img/password_for_registr.png" alt="" srcset=""
+                                style="width: 32px;">
+                          </div>
                         </div>
                         <div class="form-group mt-2">
                           {{ reg_form.password_again(type="password", class="form-style", placeholder="Подтвердите пароль", id="logpass", autocomplete="off") }}<br>
@@ -83,7 +98,10 @@
                                   {{ error }}
                               </p>
                           {% endfor %}
-                          <i class="input-icon uil uil-lock-alt"></i>
+                          <div class="input-icon">
+                                <img src="static/img/password_double.png" alt="" srcset=""
+                                style="width: 32px;">
+                          </div>
                         </div>
                         <p>{{ reg_form.submit(type="submit", class="btn mt-4", form="signup") }}</p>
                             {{message}}

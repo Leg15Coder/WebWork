@@ -155,4 +155,14 @@ def logout():
 
 @blueprint.route('/profile/<int:id>')
 def profile(id: int):
-    pass
+    params = {
+        'message': str()
+    }
+    db_sess = db_session.create_session()
+    prof = db_sess.query(User).filter(User.id == id)
+    if prof:
+        params['profile'] = prof
+        params['is_current'] = id == current_user.id
+        return render_template('users/profile.html', **params)
+    params['message'] = "Ошибка. Такого пользователя нет."
+    return render_template('users/profile.html', **params)

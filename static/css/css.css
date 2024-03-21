@@ -61,32 +61,45 @@ body {
   background-color: #1f2029;
   overflow-x: hidden;
 }
+
 a {
   cursor: pointer;
   transition: all 200ms linear;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 .link {
   color: #c4c3ca;
 }
+
 .link:hover {
-  color: #ffeba7;
+  color: #00bfbf;
 }
+
 p {
   font-weight: 500;
   font-size: 14px;
   line-height: 1.7;
 }
-h4 {
-  font-weight: 600;
+
+h4{
+  font-weight: 1000;
 }
+
+.mb-4{
+  position: relative;
+  top: 13px;
+}
+
 h6 span {
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
 }
+
 .section {
   position: relative;
   width: 100%;
@@ -100,6 +113,7 @@ h6 span {
   position: absolute;
   left: -9999px;
 }
+
 .checkbox:checked + label,
 .checkbox:not(:checked) + label {
   position: relative;
@@ -113,6 +127,7 @@ h6 span {
   cursor: pointer;
   background-color: #bfbfbf;
 }
+
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before {
   position: absolute;
@@ -120,10 +135,10 @@ h6 span {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #ffeba7;
+  color: #ffffff;
   background-color: #00bfbf;
   font-family: "unicons";
-  content: "\eb4f";
+  content: "➔";
   z-index: 20;
   top: -10px;
   left: -10px;
@@ -132,6 +147,7 @@ h6 span {
   font-size: 24px;
   transition: all 0.5s ease;
 }
+
 .checkbox:checked + label:before {
   transform: translateX(44px) rotate(-270deg);
 }
@@ -146,6 +162,7 @@ h6 span {
   perspective: 800px;
   margin-top: 60px;
 }
+
 .card-3d-wrapper {
   width: 100%;
   height: 100%;
@@ -156,6 +173,7 @@ h6 span {
   transform-style: preserve-3d;
   transition: all 600ms ease-out;
 }
+
 .card-front,
 .card-back {
   width: 100%;
@@ -176,12 +194,15 @@ h6 span {
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 .card-back {
   transform: rotateY(180deg);
 }
+
 .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
   transform: rotateY(180deg);
 }
+
 .center-wrap {
   position: absolute;
   width: 100%;
@@ -206,11 +227,11 @@ h6 span {
   width: 100%;
   font-weight: 500;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 22px;
   letter-spacing: 0.5px;
   outline: none;
-  color: #c4c3ca;
+  color: #ffffff;
   background-color: #1f2029;
   border: none;
   -webkit-transition: all 200ms linear;
@@ -226,7 +247,7 @@ h6 span {
 .input-icon {
   position: absolute;
   top: 0;
-  left: 18px;
+  left: 11px;
   height: 48px;
   font-size: 24px;
   line-height: 48px;
@@ -318,7 +339,7 @@ h6 span {
 .btn:hover {
   background-color: #00bfbf;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(0, 112, 112, 0.2);
+  box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.5);
 }
 
 .logo {
@@ -334,7 +355,6 @@ h6 span {
   width: auto;
   display: block;
 }
-
 .lending-background {
     width: 100vw;
     height: 100vh;
@@ -366,4 +386,10 @@ h6 span {
   color: #bfbfbf;
   box-shadow: 0 8px 24px 0 rgba(0, 112, 112, 0.2);
   transition: 1s;
+}
+
+#remember_me {
+    position: absolute;
+    left: 112px !important;
+    margin-top: 5px !important
 }
