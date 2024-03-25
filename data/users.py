@@ -15,6 +15,7 @@ class User(SqlAlchemyBase, UserMixin):
     hashed_password = sa.Column(sa.String, nullable=True)
     created_date = sa.Column(sa.DateTime, default=datetime.datetime.now)
     is_confirmed = sa.Column(sa.Boolean, nullable=False, default=False)
+    cards = sa.orm.relationship("Card", secondary="association", backref="users")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

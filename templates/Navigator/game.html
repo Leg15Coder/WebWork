@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        {% for card in cards %}
+        <div class="nft swiper-slide">
+            <div class='main'>
+              <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
+              <h2>{{ card.name }}</h2>
+              <div class='tokenInfo'>
+                <div class="about">
+                  <p>{{ card.about }}</p>
+                </div>
+              </div>
+              <div class='creator'>
+                <div class='wrapper'>
+                  <img src="{{ url_for('static', filename=card.field_img) }}" alt="Shape" />
+                </div>
+                <p><ins>сфера</ins> {{ card.field }}</p>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+{% endblock %}
