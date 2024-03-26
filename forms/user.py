@@ -9,14 +9,14 @@ class RegisterForm(FlaskForm):
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
     name = StringField('Имя пользователя', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Зарегестрироваться')
+    reg_submit = SubmitField('Зарегестрироваться')
 
 
 class LoginForm(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Войти')
+    log_submit = SubmitField('Войти')
 
 
 class AskRecoveryForm(FlaskForm):

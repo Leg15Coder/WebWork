@@ -7,7 +7,7 @@
 <div class="swiper mySwiper">
     <div class="swiper-wrapper">
         {% for card in cards %}
-        <div class="nft swiper-slide">
+        <div class="nft swiper-slide card" id="{{ card.id }}">
             <div class='main'>
               <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
               <h2>{{ card.name }}</h2>
@@ -31,6 +31,22 @@
     <div class="swiper-pagination"></div>
   </div>
 
+  <style class="hover"></style>
+  <form action="" method="post" id="unite">
+      {{ form.hidden_tag() }}
+      <section class="demo">
+          {{ form.first(type="text", class="first invisible") }}
+          {{ form.second(type="text", class="second invisible") }}
+        <div class="card first-card-operator"></div>
+        <span class="operator">+</span>
+        <div class="card second-card-operator"></div>
+        <span class="operator">=</span>
+        <div class="card"><span>?</span></div>
+      </section>
+      <p>{{ form.submit(type="submit", class="btn mt-4", form="unite") }}</p>
+                            {{message}}
+  </form>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".mySwiper", {
@@ -45,5 +61,87 @@
         prevEl: ".swiper-button-prev",
       },
     });
+
+    var x;
+    var $cards = $(".card");
+    var $style = $(".hover");
+
+    $cards
+      .on("mousemove touchmove", function(e) {
+        // normalise touch/mouse
+        var pos = [e.offsetX,e.offsetY];
+        e.preventDefault();
+        if ( e.type === "touchmove" ) {
+          pos = [ e.touches[0].clientX, e.touches[0].clientY ];
+        }
+        var $card = $(this);
+        // math for mouse position
+        var l = pos[0];
+        var t = pos[1];
+        var h = $card.height();
+        var w = $card.width();
+        var px = Math.abs(Math.floor(100 / w * l)-100);
+        var py = Math.abs(Math.floor(100 / h * t)-100);
+        var pa = (50-px)+(50-py);
+        // math for gradient / background positions
+        var lp = (50+(px - 50)/1.5);
+        var tp = (50+(py - 50)/1.5);
+        var px_spark = (50+(px - 50)/7);
+        var py_spark = (50+(py - 50)/7);
+        var p_opc = 20+(Math.abs(pa)*1.5);
+        var ty = ((tp - 50)/2) * -1.3;
+        var tx = ((lp - 50)/1.5) * 1;
+        var grad_pos = `background-position: ${lp}% ${tp}%;`
+        var sprk_pos = `background-position: ${px_spark}% ${py_spark}%;`
+        var opc = `opacity: ${p_opc/100};`
+        var tf = `transform: rotateX(${ty}deg) rotateY(${tx}deg)`
+        var style = `
+          .card:hover:before { ${grad_pos} }
+          .card:hover:after { ${sprk_pos} ${opc} }
+        `
+        $cards.removeClass("active");
+        $card.removeClass("animated");
+        $card.attr( "style", tf );
+        $style.html(style);
+        if ( e.type === "touchmove" ) {
+          return false;
+        }
+        clearTimeout(x);
+      }).on("mouseout touchend touchcancel", function() {
+        var $card = $(this);
+        $style.html("");
+        $card.removeAttr("style");
+        x = setTimeout(function() {
+          $card.addClass("animated");
+        },2500);
+      });
+
+     var $nft = $(".nft");
+     var first = $(".first")[0];
+     var second = $(".second")[0];
+     var first_card_operator = $(".first-card-operator")[0];
+     var second_card_operator = $(".second-card-operator")[0];
+
+     $nft
+        .on("click", function(e) {
+            var $cur_nft = $(this)[0];
+            if (first.value == $cur_nft.id) {
+                first.value = null;
+                first_card_operator.innerHTML = "";
+                first_card_operator.classList.remove("nft");
+            } else if (second.value == $cur_nft.id) {
+                second.value = null;
+                second_card_operator.innerHTML = "";
+                second_card_operator.classList.remove("nft");
+            } else if (!first.value) {
+                first.value = $cur_nft.id;
+                first_card_operator.innerHTML = $cur_nft.innerHTML;
+                first_card_operator.classList.add("nft");
+            } else {
+                second.value = $cur_nft.id;
+                second_card_operator.innerHTML = $cur_nft.innerHTML;
+                second_card_operator.classList.add("nft");
+            }
+        });
   </script>
 {% endblock %}

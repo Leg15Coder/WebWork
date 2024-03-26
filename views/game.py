@@ -1,8 +1,9 @@
 from flask import current_app as app
 from flask import redirect, url_for, render_template, Blueprint
+from flask_login import login_required, current_user
 from WEB_YL.data import db_session
 from WEB_YL.forms.game import UniteForm
-from WEB_YL.data.__all_models import Card
+from WEB_YL.data.__all_models import Card, User
 
 blueprint = Blueprint('game', __name__)
 
@@ -19,7 +20,7 @@ class CardView(object):
         return f"<CARDVIEW {self.id} {self.name}>"
 
 
-@blueprint.route('/game')
+@blueprint.route('/game', methods=['GET', 'POST'])
 def main_game():
     params = dict()
     params['form'] = UniteForm()
@@ -38,9 +39,8 @@ def main_game():
             pass
     profs = list()
     db_sess = db_session.create_session()
-    lst = list(db_sess.query(Card).all())
-    for i in range(len(lst)):
-        d = CardView(lst[i])
+    for card in db_sess.query(User).filter(User.id == current_user.id).one().cards:
+        d = CardView(card)
         profs.append(d)
     params['cards'] = profs
     return render_template('Navigator/game.html', **params)

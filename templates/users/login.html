@@ -42,7 +42,7 @@
                           </div>
                         </div>
                         <p class="mb-0 mt-4 text-center">{{ log_form.remember_me(class="mb-0 mt-4 text-center") }} {{ log_form.remember_me.label }}</p>
-                        <p>{{ log_form.submit(type="submit", class="btn mt-4", form="login") }}</p>
+                        <p>{{ log_form.log_submit(type="submit", class="btn mt-4", form="login") }}</p>
                         <div>{{ message }}</div>
                         <p class="mb-0 mt-4 text-center"><a href="/recovery_account" class="link">Забыли пароль?</a></p>
                           </form>
@@ -103,7 +103,7 @@
                                 style="width: 32px;">
                           </div>
                         </div>
-                        <p>{{ reg_form.submit(type="submit", class="btn mt-4", form="signup") }}</p>
+                        <p>{{ reg_form.reg_submit(type="submit", class="btn mt-4", form="signup") }}</p>
                             {{message}}
                           </form>
                       </div>

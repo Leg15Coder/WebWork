@@ -2,7 +2,7 @@ from WEB_YL.data.utils import logout_required, confirm_token, generate_token
 from flask import redirect, url_for, render_template, Blueprint
 from WEB_YL.data import db_session
 from WEB_YL.forms.user import LoginForm, RegisterForm, AskRecoveryForm, AcceptRecoveryForm, RecoveryForm
-from WEB_YL.data.__all_models import User
+from WEB_YL.data.__all_models import User, Card
 from flask_login import login_required, login_user, logout_user, current_user
 from flask import current_app as app
 from smtplib import SMTP_SSL
@@ -29,8 +29,8 @@ def login():
         if user and user.check_password(log_form.password.data):
             login_user(user, remember=log_form.remember_me.data)
             return redirect("/")
-        elif not user.is_confirmed:
-            params['message'] = "Вы не подтвердили аккаунт по почте"
+        # elif not user.is_confirmed:
+        #     params['message'] = "Вы не подтвердили аккаунт по почте"
         else:
             params['message'] = "Неправильный логин или пароль"
         # return render_template('users/login.html', **params)
@@ -71,14 +71,16 @@ def confirm_email(token):
         'title': 'Подтверждение аккаунта',
         'message': str()
     }
-    if current_user.is_confirmed:
-        params['message'] = "Аккаунт уже подтверждён"
-        return render_template('users/account_confirm.html', **params)
     db_sess = db_session.create_session()
     email = confirm_token(token)
     user = db_sess.query(User).filter(User.email == email).first()
     if user:
+        if user.is_confirmed:
+            params['message'] = "Аккаунт уже подтверждён"
+            return render_template('users/account_confirm.html', **params)
         user.is_confirmed = True
+        for card in db_sess.query(Card).filter(Card.id in range(1, 7)):
+            user.cards.add(card)
         db_sess.merge(user)
         db_sess.commit()
         params['message'] = "Аккаунт успешно подтверждён"
