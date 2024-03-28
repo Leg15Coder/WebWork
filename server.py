@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from data import db_session
 from data.__all_models import User
 from views import users, navigator, game
+from data.utils import load_cards
 
 
 app = Flask(__name__)
@@ -29,6 +30,7 @@ def root() -> str:
 
 def main() -> None:
     db_session.global_init("db/db.db")
+    load_cards("data/cards.json")
     app.register_blueprint(users.blueprint)
     app.register_blueprint(navigator.blueprint)
     app.register_blueprint(game.blueprint)

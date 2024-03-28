@@ -5,10 +5,8 @@ from .db_session import SqlAlchemyBase
 association_table = sa.Table(
     'association',
     SqlAlchemyBase.metadata,
-    sa.Column('cards', sa.Integer,
-                      sa.ForeignKey('cards.id')),
-    sa.Column('users', sa.Integer,
-                      sa.ForeignKey('users.id'))
+    sa.Column('cards', sa.Integer, sa.ForeignKey('cards.id')),
+    sa.Column('users', sa.Integer, sa.ForeignKey('users.id'))
 )
 
 

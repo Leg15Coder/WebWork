@@ -79,8 +79,9 @@ def confirm_email(token):
             params['message'] = "Аккаунт уже подтверждён"
             return render_template('users/account_confirm.html', **params)
         user.is_confirmed = True
-        for card in db_sess.query(Card).filter(Card.id in range(1, 7)):
-            user.cards.add(card)
+        for i in range(1, 7):
+            for card in db_sess.query(Card).filter(Card.id == i).all():
+                user.cards.append(card)
         db_sess.merge(user)
         db_sess.commit()
         params['message'] = "Аккаунт успешно подтверждён"

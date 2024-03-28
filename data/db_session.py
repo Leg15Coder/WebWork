@@ -1,6 +1,50 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 from sqlalchemy.orm import Session
+import json
+
+
+with open("data/cards.json", 'w') as f:
+    data = [
+        {
+            "id": 1,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+        {
+            "id": 2,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+        {
+            "id": 3,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+        {
+            "id": 4,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+        {
+            "id": 5,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+        {
+            "id": 6,
+            "name": "",
+            "about": "",
+            "field": ""
+        },
+    ]
+    json.dump(data, f, indent=4)
+
 
 SqlAlchemyBase = orm.declarative_base()
 
