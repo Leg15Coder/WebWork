@@ -25,3 +25,19 @@ class Card(SqlAlchemyBase):
 
     def __repr__(self):
         return f"<CARD {self.id} {self.name}>"
+
+
+class CardView(object):
+    def __init__(self, card: Card):
+        self.name = card.name
+        self.id = card.id
+        self.img = f'img/cards/{card.id}.png'
+        self.field = card.field
+        self.field_img = f'img/fields/{self.field}.png'
+        if len(card.about) > 61:
+            self.about = card.about[:61] + '...'
+        else:
+            self.about = card.about
+
+    def __repr__(self):
+        return f"<CARDVIEW {self.id} {self.name}>"

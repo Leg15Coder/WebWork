@@ -4,13 +4,14 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+<style class="hover"></style>
 <div class="swiper mySwiper">
     <div class="swiper-wrapper">
         {% for card in cards %}
-        <div class="nft swiper-slide card" id="{{ card.id }}">
+        <div class="card nft swiper-slide" id="{{ card.id }}">
             <div class='main'>
               <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
-              <h2>{{ card.name }}</h2>
+              <a href="{{ url_for('navigator.profession', card=card.id) }}"><h2>{{ card.name }}</h2></a>
               <div class='tokenInfo'>
                 <div class="about">
                   <p>{{ card.about }}</p>
@@ -31,15 +32,15 @@
     <div class="swiper-pagination"></div>
   </div>
 
-  <style class="hover"></style>
+
   <form action="" method="post" id="unite">
       {{ form.hidden_tag() }}
       <section class="demo">
           {{ form.first(type="text", class="first invisible") }}
           {{ form.second(type="text", class="second invisible") }}
-        <div class="card first-card-operator"></div>
+        <div class="card first-card-operator" id="first"></div>
         <span class="operator">+</span>
-        <div class="card second-card-operator"></div>
+        <div class="card second-card-operator" id="second"></div>
         <span class="operator">=</span>
         <div class="card"><span>?</span></div>
       </section>
@@ -113,7 +114,7 @@
         $card.removeAttr("style");
         x = setTimeout(function() {
           $card.addClass("animated");
-        },2500);
+        },3500);
       });
 
      var $nft = $(".nft");
@@ -125,11 +126,11 @@
      $nft
         .on("click", function(e) {
             var $cur_nft = $(this)[0];
-            if (first.value == $cur_nft.id) {
+            if (first.value == $cur_nft.id || $cur_nft.id == "first") {
                 first.value = null;
                 first_card_operator.innerHTML = "";
                 first_card_operator.classList.remove("nft");
-            } else if (second.value == $cur_nft.id) {
+            } else if (second.value == $cur_nft.id || $cur_nft.id == "second") {
                 second.value = null;
                 second_card_operator.innerHTML = "";
                 second_card_operator.classList.remove("nft");

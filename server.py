@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_login import LoginManager
 from data import db_session
 from data.__all_models import User
-from views import users, navigator, game
+from views import users, navigator, game, api
 from data.utils import load_cards
 
 
@@ -34,6 +34,7 @@ def main() -> None:
     app.register_blueprint(users.blueprint)
     app.register_blueprint(navigator.blueprint)
     app.register_blueprint(game.blueprint)
+    app.register_blueprint(api.blueprint)
     app.run()
 
 

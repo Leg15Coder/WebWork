@@ -5,6 +5,7 @@ from flask_login import current_user
 from functools import wraps
 from .cards import Card
 from .db_session import create_session
+from .api_keys import KeyAPI
 import json
 
 
@@ -47,4 +48,21 @@ def load_cards(data_file: str) -> None:
                 new.about = data[i]['about']
                 new.field = data[i]['field']
                 db_sess.add(new)
+    db_sess.commit()
+
+
+def check_key_limited(key: KeyAPI):
+    lim = key.limit
+    if lim != 0:
+        return True
+    return False
+
+
+def update_key_limit(key: KeyAPI, val: int):
+    db_sess = create_session()
+    if key.limit > 0:
+        key.limit += val
+    elif key.limit == 0 and val >= 0:
+        key.limit += val
+    db_sess.merge(key)
     db_sess.commit()

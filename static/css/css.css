@@ -63,6 +63,8 @@ body {
 }
 
 a {
+  user-select: none;
+  text-decoration: none;
   cursor: pointer;
   transition: all 200ms linear;
 }
@@ -405,7 +407,6 @@ h6 span {
 .nft{
   user-select:none;
   max-width: 350px;
-  margin: 5rem auto;
   border: 1px solid #ffffff22;
   background-color: #282c34 !important;
   background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%);
@@ -557,7 +558,7 @@ h6 span {
 
   position: relative;
   overflow: hidden;
-  margin: 20px;
+  margin: 10px;
   overflow: hidden;
   z-index: 10;
   touch-action: none;

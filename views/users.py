@@ -23,18 +23,18 @@ def login():
         'reg_form': reg_form,
         'log_form': log_form
     }
-    if log_form.validate_on_submit():
+    if log_form.log_submit.data and log_form.validate():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == log_form.email.data).first()
         if user and user.check_password(log_form.password.data):
             login_user(user, remember=log_form.remember_me.data)
             return redirect("/")
-        # elif not user.is_confirmed:
-        #     params['message'] = "Вы не подтвердили аккаунт по почте"
+        elif not user.is_confirmed:
+            params['message'] = "Вы не подтвердили аккаунт по почте"
         else:
             params['message'] = "Неправильный логин или пароль"
-        # return render_template('users/login.html', **params)
-    if reg_form.validate_on_submit():
+        return render_template('users/login.html', **params)
+    if reg_form.reg_submit.data and reg_form.validate():
         if reg_form.password.data != reg_form.password_again.data:
             params['message'] = "Пароли не совпадают"
             return render_template('users/login.html', **params)
