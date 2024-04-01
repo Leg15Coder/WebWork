@@ -23,12 +23,15 @@ def login():
         'reg_form': reg_form,
         'log_form': log_form
     }
+    print(log_form.log_submit.data, log_form.validate())
+    print(log_form.email.data, log_form.password.data, log_form.remember_me.data)
     if log_form.log_submit.data and log_form.validate():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == log_form.email.data).first()
+        print(user, user.check_password(log_form.password.data))
         if user and user.check_password(log_form.password.data):
             login_user(user, remember=log_form.remember_me.data)
-            return redirect("/")
+            return redirect("/index")
         elif not user.is_confirmed:
             params['message'] = "Вы не подтвердили аккаунт по почте"
         else:
@@ -61,7 +64,7 @@ def login():
             server.login(app.config['MAIL_DEFAULT_SENDER'], app.config['MAIL_PASSWORD'])
             server.sendmail(app.config['MAIL_USERNAME'], user.email, msg.as_string())
             server.close()
-        return redirect('/')
+        return redirect('/index')
     return render_template('users/login.html', **params)
 
 

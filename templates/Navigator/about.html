@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/about.css')}}">
+    <title>{{ title }}</title>
+</head>
+<body>
+	<section class="about">
+		<h1>О НАС</h1>
+		<p style="font-weight: bold">
+		Начни с этого....
+		</p>
+		<div class="about-info">
+			<div class="about-img">
+				<img src="{{url_for('static', filename='img/logo.png')}}" alt="Geeksforgeeks">
+			</div>
+			<div>
+			<p> Lorem Ipsum is a leading platform
+				that provides computer science resources
+				and coding challenges for programmers and
+				technology enthusiasts,along with interview
+				and exam preparations for upcoming aspirants.
+				With a strong emphasis on enhancing coding skills
+				and knowledge,it has become a trusted destination
+				for over 12 million plus registered users worldwide.
+			</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="team">
+		<h1>Команда проекта</h1>
+		<div class="team-cards">
+			<div class="card">
+				<div class="card-img">
+					<img src="{{url_for('static', filename='img/about/Dima.png')}}" alt="Dima">
+				</div>
+				<div class="card-info">
+					<h2 class="card-name">Дмитрий Ряжских</h2>
+					<p class="card-role"></p>
+					<p class="card-email">rya</p>
+					<p><button class="button">Contact</button></p>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-img">
+					<img src="{{url_for('static', filename='img/about/Matvey.png')}}" alt="Matvey">
+				</div>
+				<div class="card-info">
+					<h2 class="card-name">Матвей Мягков</h2>
+					<p class="card-role"></p>
+					<p class="card-email"></p>
+					<p><button class="button">Contact</button></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<p>© 2024 StartTeam. All Rights Reserved.</p>
+	</footer>
+</body>
+
+{% endblock %}

@@ -8,12 +8,19 @@ blueprint = Blueprint('navigator', __name__)
 
 @blueprint.route('/about')
 def about():
-    pass
+    params = dict()
+    return render_template('Navigator/about.html', **params)
 
 
 @blueprint.route('/scope/<int:card>')
 def scope(card: int):
     pass
+
+
+@blueprint.route('/profession/all')
+def professions():
+    params = dict()
+    return render_template("Navigator/all_professions.html", **params)
 
 
 @blueprint.route('/profession/<int:card>')

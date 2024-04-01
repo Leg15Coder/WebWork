@@ -16,7 +16,7 @@
     <body class="bg-dark text-light">
         <header>
             <nav class="navbar navbar-dark bg-dark fixed-top">
-                <a class="navbar-brand" href="/"><img src="{{url_for('static', filename='img/logo.png')}}" alt="ICON" class="nav-logo"></a>
+                <a class="navbar-brand" href="/index"><img src="{{url_for('static', filename='img/logo.png')}}" alt="ICON" class="nav-logo"></a>
                 <a class="nav-link nav-item text-light" href="/profession/all">Главная</a>
                 <a class="nav-link nav-item text-light" href="/game">Игра</a>
                 <a class="nav-link nav-item text-light" href="/about">О нас</a>
@@ -27,7 +27,7 @@
                     </button>
 
                     <div class="dropdown-menu dropdown-menu-right bg-dark text-light" aria-labelledby="navdropdown">
-                        <a class="dropdown-item bg-dark text-light" href="/profile/{{current_user.id}}">{{current_user.name}}</a>
+                        <a class="dropdown-item bg-dark text-light" href="/profile/{{current_user.id}}">{{ current_user.name }}</a>
                         <a class="dropdown-item bg-dark text-light" href="/logout">Выйти</a>
                     </div>
                 </div>

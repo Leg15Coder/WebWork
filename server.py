@@ -21,6 +21,7 @@ def load_user(user_id: int) -> User:
 
 
 @app.route('/')
+@app.route('/index')
 def root() -> str:
     param = {
         'title': "Navigator in IT",
@@ -35,7 +36,7 @@ def main() -> None:
     app.register_blueprint(navigator.blueprint)
     app.register_blueprint(game.blueprint)
     app.register_blueprint(api.blueprint)
-    app.run()
+    app.run(host='127.0.0.1', port=5000)
 
 
 if __name__ == '__main__':
