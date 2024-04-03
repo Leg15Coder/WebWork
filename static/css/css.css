@@ -406,7 +406,10 @@ h6 span {
 
 .nft{
   user-select:none;
+  width: 350px;
+  height: 435px;
   max-width: 350px;
+  max-height: 450px;
   border: 1px solid #ffffff22;
   background-color: #282c34 !important;
   background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%);

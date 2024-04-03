@@ -11,7 +11,7 @@
         <div class="card nft swiper-slide" id="{{ card.id }}">
             <div class='main'>
               <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
-              <a href="{{ url_for('navigator.profession', card=card.id) }}"><h2>{{ card.name }}</h2></a>
+              <a href="{{ url_for('navigator.profession', card=card.id) }}"><h3>{{ card.name }}</h3></a>
               <div class='tokenInfo'>
                 <div class="about">
                   <p>{{ card.about }}</p>
