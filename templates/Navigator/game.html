@@ -3,6 +3,7 @@
 {% block content %}
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cards.css')}}" />
 </head>
 <style class="hover"></style>
 <div class="swiper mySwiper">
@@ -44,8 +45,8 @@
         <span class="operator">=</span>
         <div class="card"><span>?</span></div>
       </section>
-      <p>{{ form.submit(type="submit", class="btn mt-4", form="unite") }}</p>
-                            {{message}}
+      <p align="center">{{ form.submit(type="submit", class="btn mt-4", form="unite") }}</p>
+      <p align="center"> {{message}} </p>
   </form>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

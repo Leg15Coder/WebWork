@@ -26,9 +26,12 @@ def main_game():
             if not card:
                 params['message'] = "К сожалению, мы не можем объединить эти две сферы"
             elif card not in user.cards:
+                params['message'] = f"Вы открыли профессию {card.name}!"
                 user.cards.append(card)
                 db_sess.merge(user)
                 db_sess.commit()
+            else:
+                params['message'] = "Вы уже открыли эту профессию"
         profs = list()
         for card in user.cards:
             d = CardView(card)
