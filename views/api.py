@@ -3,6 +3,7 @@ from flask import jsonify, Blueprint, make_response, request
 from WEB_YL.data import db_session
 from WEB_YL.data.__all_models import Card, User, KeyAPI
 from WEB_YL.data.utils import check_key_limited, update_key_limit
+import os
 
 blueprint = Blueprint('api', __name__)
 
@@ -16,12 +17,14 @@ def post_cards():
         key = db_sess.query(KeyAPI).filter(KeyAPI.key == request.json['api_key']).first()
         if not key:
             return make_response(jsonify({'error': 'Undefined API key'}), 400)
-        is_post = key.is_post
         is_admin = key.is_admin
         if not is_admin or not check_key_limited(key):
             return make_response(jsonify({'error': 'Not enough access rights'}), 400)
         card = db_sess.query(Card).filter(Card.id == int(request.json['id'])).first()
         if card:
+            file = request.files['file']
+            if file and file.filename.split('.')[0] == str(request.json['id']):
+                file.save(os.path.join('static/img/cards'), file.filename)
             card.id = int(request.json['id'])
             card.name = str(request.json['name'])
             card.about = str(request.json['about'])
@@ -56,7 +59,6 @@ def delete_cards():
         key = db_sess.query(KeyAPI).filter(KeyAPI.key == request.json['api_key']).first()
         if not key:
             return make_response(jsonify({'error': 'Undefined API key'}), 400)
-        is_post = key.is_post
         is_admin = key.is_admin
         if not is_admin or not check_key_limited(key):
             return make_response(jsonify({'error': 'Not enough access rights'}), 400)

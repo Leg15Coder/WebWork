@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mat.css')}}" />
+</head>
+    <section class="hero d-flex flex-column align-items-center justify-content-center">
+      <div class="text-center">
+        <h1 class="h1 text-white fw-medium fst-italic">Data science, machine learning</h1>
+        <a href="#skills" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Подробнее</a>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="container py-5" id="skills">
+      <div class="row mt-4 py-3">
+        <div class="col-12 d-flex flex-column text-center justify-content-center">
+          <h2>SKILLS</h2>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-between mx-0">
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-cart-shopping"></i>
+          <h3 class="bigtext_WEB">Примеры</h3>
+          <p class="smalltext_WEB">Стихия будущего. Анализ данных, машинное обучение, нейронные сети, наука о данных. Все эти понятия связаны между собой, и формируют отдельный, порой кажется особенный мир, в котором проходят самые невероятные открытия.</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-laptop"></i>
+          <h3 class="bigtext_WEB">Высокий и низкий уровень</h3>
+          <p class="smalltext_WEB">Завязана на Python и двух мощнейших технологиях Fortran Rust</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Статы</h3>
+          <p class="smalltext_WEB">Высочайшая востребованность. Много вакансий 80k+/35k+. Зарплаты 80k+/190k+/500k+</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Умения</h3>
+          <p class="smalltext_WEB">Хорошая база. Много материала для обучения. Высокий порог входа</p>
+        </div>
+      </div>
+      <a href="/profession/all" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Вернуться к выбору профессий</a>
+    </section>
+
+{% endblock %}

@@ -9,22 +9,26 @@
 <div class="swiper mySwiper">
     <div class="swiper-wrapper">
         {% for card in cards %}
-        <div class="card nft swiper-slide" id="{{ card.id }}">
-            <div class='main'>
-              <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
-              <a href="{{ url_for('navigator.profession', card=card.id) }}"><h3>{{ card.name }}</h3></a>
-              <div class='tokenInfo'>
-                <div class="about">
-                  <p>{{ card.about }}</p>
+        <div class="swiper-slide">
+            <div class="nft card"  id="{{ card.id }}">
+                <div class='main'>
+                  <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
+                  <a href="{{ url_for('navigator.profession', card=card.id) }}"><h3>{{ card.name }}</h3></a>
+                  <div class='tokenInfo'>
+                    <div class="about">
+                      <p>{{ card.about }}</p>
+                    </div>
+                  </div>
+                  <div class='creator'>
+                    <div class='wrapper'>
+                      <img src="{{ url_for('static', filename=card.field_img) }}" alt="Shape" />
+                    </div>
+                    <p><ins>сфера</ins> {{ card.field }}</p>
+                  </div>
                 </div>
-              </div>
-              <div class='creator'>
-                <div class='wrapper'>
-                  <img src="{{ url_for('static', filename=card.field_img) }}" alt="Shape" />
-                </div>
-                <p><ins>сфера</ins> {{ card.field }}</p>
-              </div>
             </div>
+            <br />
+            <div class="card-pagination"><a href="{{ url_for('navigator.profession', card=card.id) }}">Узнать больше</a></div>
         </div>
         {% endfor %}
     </div>

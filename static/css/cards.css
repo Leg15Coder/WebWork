@@ -1,9 +1,7 @@
 .nft{
   user-select:none;
   width: 350px;
-  height: 435px;
-  max-width: 350px;
-  max-height: 450px;
+  height: 450px;
   border: 1px solid #ffffff22;
   background-color: #282c34 !important;
   background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%);
@@ -117,6 +115,7 @@
 
 .swiper-slide {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .swiper-slide img {
@@ -145,12 +144,12 @@
     // width: clamp(200px, 61vh, 18vw);
     // height: clamp(280px, 85vh, 25.2vw);
   @media screen and (min-width: 600px) {
-    // width: 61vh;
+    // width: 71vh;
     // height: 85vh;
     // max-width: 500px;
     // max-height: 700px;
-    width: clamp(12.9vw, 61vh, 18vw);
-    height: clamp(18vw, 85vh, 25.2vw);
+    width: clamp(12.9vw, 71vh, 350px);
+    height: clamp(18vw, 85vh, 26vw);
   }
 
   position: relative;
@@ -158,7 +157,9 @@
   margin: 10px;
   overflow: hidden;
   z-index: 10;
-  touch-action: none;
+  display: flex;
+  flex-direction: column;
+
 
   border-radius: 5% / 3.5%;
   box-shadow:
@@ -416,6 +417,17 @@
     width: 0px !important;
 }
 
+.card-pagination {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    clear: both;
+    float: center;
+    padding: 10px;
+    text-align: center;
+    top: -40px;
+}
+
 @keyframes rubberBand {
   from {
     transform: scale3d(1, 1, 1);
@@ -444,4 +456,8 @@
   to {
     transform: scale3d(1, 1, 1);
   }
+}
+
+.swiper-wrapper {
+    height: 540px !important;
 }

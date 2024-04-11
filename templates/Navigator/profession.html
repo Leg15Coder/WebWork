@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cards.css')}}" />
+</head>
 <div class='main'>
   <img class='tokenImage' src="{{ url_for('static', filename=card.img) }}" alt="IMG" />
   <h2>{{ card.name }}</h2>
   <div class='tokenInfo'>
     <div class="about">
-      <p>{{ card.about }}</p>
+      <p>{{ card.about_all }}</p>
     </div>
   </div>
   <div class='creator'>

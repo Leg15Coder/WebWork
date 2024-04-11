@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mat.css')}}" />
+</head>
+    <section class="hero d-flex flex-column align-items-center justify-content-center">
+      <div class="text-center">
+        <h1 class="h1 text-white fw-medium fst-italic">Веб разработчики</h1>
+        <h2 class="display-3 text-white fw-bold"> Делятся на два основных класса<br /> Front-end / Back-end</h2>
+        <a href="#skills" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Подробнее</a>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="container py-5" id="skills">
+      <div class="row mt-4 py-3">
+        <div class="col-12 d-flex flex-column text-center justify-content-center">
+          <h2>SKILLS</h2>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-between mx-0">
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-cart-shopping"></i>
+          <h3 class="bigtext_WEB">Примеры</h3>
+          <p class="smalltext_WEB">Почти любая современная разработка имеет веб-версию. Вы будете писать как простые и понятные вещи, вроде интернет магазинов, но возможности веб разработчиков почти безграничны, и вы сможете запустить здесь. Все что придёт вам в голову</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-laptop"></i>
+          <h3 class="bigtext_WEB">Front-end Development</h3>
+          <p class="smalltext_WEB">Знание JS Ts html/css WebAsm Вакансии Зарубеж (86255 jobs) СНГ (4788jobs) Зарплаты Junior - 70k+ Midle - 170k+ Senjor - 300k+</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Back-end Development</h3>
+          <p class="smalltext_WEB">Знание Go JS Java/C# Python php sql Вакансии Зарубеж (112701 jobs) СНГ (5611jobs) Зарплаты Junior - 120k+ Midle - 250k+ Senjor - 450k+</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Умения</h3>
+          <p class="smalltext_WEB">Относительно лёгкий вход. Много годных бесплатных материалов. Огромное сообщество. Сложно переключаться в другую ветвь разработки</p>
+        </div>
+      </div>
+      <a href="/profession/all" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Вернуться к выбору профессий</a>
+    </section>
+
+{% endblock %}

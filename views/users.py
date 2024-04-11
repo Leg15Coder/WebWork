@@ -156,19 +156,19 @@ def recovery_email(token):
 @login_required
 def logout():
     logout_user()
-    return redirect("/")
+    return redirect("/index")
 
 
-@blueprint.route('/profile/<int:id>')
-def profile(id: int):
+@blueprint.route('/profile/<int:indif>')
+def profile(indif: int):
     params = {
         'message': str()
     }
     db_sess = db_session.create_session()
-    prof = db_sess.query(User).filter(User.id == id)
+    prof = db_sess.query(User).filter(User.id == indif).first()
     if prof:
         params['profile'] = prof
-        params['is_current'] = id == current_user.id
+        params['is_current'] = indif == current_user.id
         return render_template('users/profile.html', **params)
     params['message'] = "Ошибка. Такого пользователя нет."
     return render_template('users/profile.html', **params)

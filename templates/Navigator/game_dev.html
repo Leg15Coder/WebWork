@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mat.css')}}" />
+</head>
+    <section class="hero d-flex flex-column align-items-center justify-content-center">
+      <div class="text-center">
+        <h1 class="h1 text-white fw-medium fst-italic">Разработчики игр</h1>
+        <h2 class="display-3 text-white fw-bold"> Делятся на два основных класса<br /> Разработчики движков / Разработчики игр</h2>
+        <a href="#skills" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Подробнее</a>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="container py-5" id="skills">
+      <div class="row mt-4 py-3">
+        <div class="col-12 d-flex flex-column text-center justify-content-center">
+          <h2>SKILLS</h2>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-between mx-0">
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-cart-shopping"></i>
+          <h3 class="bigtext_WEB">Примеры</h3>
+          <p class="smalltext_WEB">Стихия симбиоза инженера с игровым движком. Инди разработка отличается в масштабах, и зачастую можно встретить как 2-3 человека делают все, начаиная от движак вплоть до арта</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-laptop"></i>
+          <h3 class="bigtext_WEB">Разработчики движков</h3>
+          <p class="smalltext_WEB">Стихия воплощения всех законов физики и математики в виртуальный мир. Разработчики таких игровых движков как Unreal Engine, Unity создают возможности. Подсистемы: анимации, физика, эффекты, освещение, тени, 2D/3D. Знание Python/C++ Rust. Senjor - 600k+</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Разработчик игр</h3>
+          <p class="smalltext_WEB">Art/UI/Механики/Анимации/Мультиплеер. Знание C++ C# JS Kotlin Swift Python. 80k+/170k+/300k+</p>
+        </div>
+        <div class="card mt-5 d-flex flex-column align-items-center text-center bg-white p-4" style="width: 25rem">
+          <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-mobile-screen-button"></i>
+          <h3 class="bigtext_WEB">Умения</h3>
+          <p class="smalltext_WEB">Зачастую интересная работа. Можно в соло сделать мировой продукт. Развита база. Высокий порог входа</p>
+        </div>
+      </div>
+      <a href="/profession/all" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3">Вернуться к выбору профессий</a>
+    </section>
+
+{% endblock %}

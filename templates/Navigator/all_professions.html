@@ -1,9 +1,56 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <p>
-    МАТВЕЙ! пора бы уже сделать эту страницу ._.
-  </p>
-</div>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mat.css')}}" />
+</head>
+    <div class="body_all_prof">
+        <div class="container_all_prof" >
+            <div class="imagebox">
+                <img src="{{url_for('static', filename='img/profile.png')}}" class="img1">
+            </div>
+            <span class="object_all_p objblue"></span>
+            <span class="bigtext">GO</span>
+            <div class="title">Веб программист</div>
+            <div class="buySection">
+                <h2><sup>$</sup>0<span></span></h2>
+                <a href="/profession/WEB">
+                    <button class="bluebtn">GET start</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="container_all_prof" >
+            <div class="imagebox">
+                <img src="{{url_for('static', filename='img/profile.png')}}" class="img1">
+            </div>
+            <span class="object_all_p objred"></span>
+            <span class="bigtext">GO</span>
+            <div class="title">Gamedev</div>
+            <div class="buySection">
+                <h2><sup>$</sup>0<span></span></h2>
+                <a href="/profession/game_dev">
+                    <button class="redbtn">GET start</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="container_all_prof" >
+            <div class="imagebox">
+                <img src="{{url_for('static', filename='img/profile.png')}}" class="img1">
+            </div>
+            <span class="object_all_p objviolete"></span>
+            <span class="bigtext">GO</span>
+            <div class="title">Data science, ML</div>
+            <div class="buySection">
+                <h2><sup>$</sup>0<span></span></h2>
+                <a href="/profession/data_science">
+                    <button class="violetebtn">GET start</button>
+                </a>
+            </div>
+        </div>
+        <div class="bgposter"></div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="./script.js"></script>
+
 {% endblock %}

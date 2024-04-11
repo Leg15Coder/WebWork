@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="text-light lending-background">
-        <a href="/profession/all"><button class="circle-btn">START</button></a>
-    </div>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mat.css')}}" />
+</head>
+<div class="container_for_main">
+    <a href="/profession/all" class="button button--piyo">
+        <div class="button__wrapper">
+            <span class="button__text">START</span>
+        </div>
+        <div class="characterBox">
+            <div class="character wakeup">
+                <div class="character__face"></div>
+            </div>
+            <div class="character wakeup">
+                <div class="character__face"></div>
+            </div>
+            <div class="character">
+                <div class="character__face"></div>
+            </div>
+        </div>
+    </a>
+</div>
 {% endblock %}

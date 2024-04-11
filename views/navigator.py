@@ -1,7 +1,7 @@
 from flask import current_app as app
 from flask import redirect, url_for, render_template, Blueprint
-from WEB_YL.data import db_session
-from WEB_YL.data.__all_models import Card, CardView
+from data import db_session
+from data.__all_models import Card, CardView
 
 blueprint = Blueprint('navigator', __name__)
 
@@ -12,15 +12,28 @@ def about():
     return render_template('Navigator/about.html', **params)
 
 
-@blueprint.route('/scope/<int:card>')
-def scope(card: int):
-    pass
-
-
 @blueprint.route('/profession/all')
 def professions():
     params = dict()
     return render_template("Navigator/all_professions.html", **params)
+
+
+@blueprint.route('/profession/WEB')
+def WEB():
+    params = dict()
+    return render_template("Navigator/WEB.html", **params)
+
+
+@blueprint.route('/profession/game_dev')
+def game_dev():
+    params = dict()
+    return render_template("Navigator/game_dev.html", **params)
+
+
+@blueprint.route('/profession/data_science')
+def data_science():
+    params = dict()
+    return render_template("Navigator/data_science.html", **params)
 
 
 @blueprint.route('/profession/<int:card>')

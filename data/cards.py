@@ -34,6 +34,7 @@ class CardView(object):
         self.img = f'img/cards/{card.id}.png'
         self.field = card.field
         self.field_img = f'img/fields/{self.field}.png'
+        self.about_all = card.about
         if len(card.about) > 61:
             self.about = card.about[:61] + '...'
         else:
